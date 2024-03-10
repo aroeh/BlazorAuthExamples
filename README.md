@@ -51,6 +51,7 @@ api://<client-id>/<scope-name>
 
 ### Server
 1. Update the appsettings.json and point to your Azure Tenant and App Registration for the Client application
+```
 "AzureAd": {
     "Instance": "https://login.microsoftonline.com/",
     "Domain": "qualified.domain.name",
@@ -59,6 +60,7 @@ api://<client-id>/<scope-name>
     "Scopes": "access_as_user",
     "CallbackPath": "/signin-oidc"
 }
+```
 
 ## SeparateClientAndAPI
 
