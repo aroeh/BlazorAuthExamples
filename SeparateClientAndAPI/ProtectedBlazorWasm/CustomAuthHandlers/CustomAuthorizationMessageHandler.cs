@@ -9,7 +9,7 @@ namespace ProtectedBlazorWasm.CustomAuthHandlers
             : base(provider, navigation)
         {
             ConfigureHandler(
-                authorizedUrls: ["https://localhost:7189"] // Authorized API URL for http requests
+                authorizedUrls: [ "https://localhost:7189", "http://localhost:5142" ] // Authorized API URL for http requests
             );
         }
     }

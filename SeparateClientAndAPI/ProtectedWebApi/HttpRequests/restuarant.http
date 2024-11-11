@@ -1,0 +1,132 @@
+@appJson = application/json
+@controllerAddress = {{baseAddress}}/api/restuarant
+@token = Bearer token
+
+GET {{controllerAddress}}
+Authorization: {{token}}
+### GET - Get All Restuarants
+
+
+POST {{controllerAddress}}/find
+Authorization: {{token}}
+Accept: {{appJson}}
+Content-Type: {{appJson}}
+
+{
+  "name": "Test",
+  "cuisine": "Test"
+}
+### POST - Find Restuarants by search criteria
+
+
+@id = 66b03c2009119f72a45f9c4f
+GET {{controllerAddress}}/{{id}}
+Authorization: {{token}}
+### GET - Get Restuarant by id
+
+
+
+POST {{baseAddress}}/api/restuarant
+Authorization: {{token}}
+Accept: {{appJson}}
+Content-Type: {{appJson}}
+
+{
+    "name": "Test",
+    "cuisineType": "Test",
+    "website": "https://www.google.com/",
+    "phone": "1112223333",
+    "address": {
+        "street": "123 Test Street",
+        "city": "Somewhere",
+        "state": "KY",
+        "zipCode": "12345",
+        "country": "United States"
+    }
+}
+### POST - Add a new Restuarant
+
+
+POST {{baseAddress}}/api/restuarant/bulk
+Authorization: {{token}}
+Accept: {{appJson}}
+Content-Type: {{appJson}}
+
+[
+  {
+    "name": "Monster Cookie",
+    "cuisineType": "Cookie",
+    "website": "https://www.monstercookies.com",
+    "phone": "+1 502.123.4567",
+    "address": {
+        "street": "123 Cookie Avenue",
+        "city": "Bossville",
+        "state": "KY",
+        "zipCode": "12345-6789",
+        "country": "United States"
+    }
+  },
+  {
+    "name": "Pizza Pals",
+    "cuisineType": "Pizza",
+    "website": "https://www.pizza.com/",
+    "phone": "+1 502.456.9786",
+    "address": {
+        "street": "123 Pizza Place",
+        "city": "Cheese Town",
+        "state": "KY",
+        "zipCode": "12345-6789",
+        "country": "United States"
+    }
+  },
+  {
+    "name": "Donut Worry, Be Happy",
+    "cuisineType": "Pastry",
+    "website": "https://www.awesomedonuts.com/",
+    "phone": "+1 502.648.5773",
+    "address": {
+        "street": "123 Donut Way",
+        "city": "Tasty",
+        "state": "KY",
+        "zipCode": "12345",
+        "country": "United States"
+    }
+  },
+  {
+    "name": "Taco Time",
+    "cuisineType": "Mexican",
+    "website": "https://www.timefortacos.com/",
+    "phone": "+1 502.123.6736",
+    "address": {
+        "street": "123 Queso Parkway",
+        "city": "Tortilla",
+        "state": "KY",
+        "zipCode": "12345",
+        "country": "United States"
+    }
+  }
+]
+### POST - Add many new Restuarants
+
+
+
+PUT {{baseAddress}}/api/restuarant
+Authorization: {{token}}
+Accept: {{appJson}}
+Content-Type: {{appJson}}
+
+{
+    "id": "66b03c2009119f72a45f9c4f",
+    "name": "Test",
+    "cuisineType": "Test",
+    "website": "https://www.google.com",
+    "phone": "1112223333",
+    "address": {
+        "street": "123 Test Street",
+        "city": "Somewhere",
+        "state": "KY",
+        "zipCode": "12345",
+        "country": "United States"
+    }
+}
+### PUT - Update an existing Restuarant

@@ -14,7 +14,10 @@ string baseApiUri = builder.Configuration["BaseApiUri"] ?? "https://localhost";
 
 const string httpClientName = "ProtectedWebApi";
 // a custom handler is needed to add bearer tokens to apis outside of the client's base domain/resources
-builder.Services.AddHttpClient(httpClientName, client => client.BaseAddress = new Uri(baseApiUri))
+builder.Services.AddHttpClient(httpClientName, client =>
+    {
+        client.BaseAddress = new Uri(baseApiUri);
+    })
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(httpClientName));

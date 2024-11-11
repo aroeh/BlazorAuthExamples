@@ -7,6 +7,7 @@ namespace ProtectedWebApi.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
     {
