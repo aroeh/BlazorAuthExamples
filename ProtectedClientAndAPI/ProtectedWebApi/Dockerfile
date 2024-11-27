@@ -7,12 +7,12 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["ProtectedWebApi/ProtectedWebApi.csproj", "ProtectedWebApi/"]
-COPY ["Protected.Shared/Protected.Shared.csproj", "Protected.Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 
 RUN dotnet restore "ProtectedWebApi/ProtectedWebApi.csproj"
 
 COPY ["ProtectedWebApi/.", "./ProtectedWebApi/"]
-COPY ["Protected.Shared/.", "./Protected.Shared/"]
+COPY ["Shared/.", "./Shared/"]
 
 WORKDIR "/src/ProtectedWebApi"
 RUN dotnet build "./ProtectedWebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
