@@ -1,11 +1,57 @@
-# BlazorAuthExamples
-Repository containing examples for implementing authentication and authorization in Blazor and APIs
+# AspHostedBlazorAuth
+This project is an example of a Blazor WASM application hosted in an asp.net application.  There is an API and a Client app contained in the solution and running all on the same domain.
+
+This project was created using the following command
+
+```
+dotnet new blazorwasm -au SingleOrg --api-client-id "<api-client-id>" --app-id-uri "<api-client-id>" --client-id "<app-client-id>" --default-scope "<api-scope>" --domain "<azure-tenant-domain>.onmicrosoft.com" -ho -o <solution-name> --tenant-id "<azure-tenant-id>"
+```
+
+> At the time of writing, the project template uses .Net 7.0 for the Client, Server, and Shared projects
+> Those projects in this solution have been updated to .Net 8.0 and all nuget packages updated to align
+
 
 # Dependencies
 - Azure
 - Microsoft Entra Identity Tenant
 - API App Registration
 - Client App Registration
+
+
+# Setup
+
+1. Build the solution or each project individually
+2. Update the Client and Server project appsettings.json and set values for your Azure Tenant and App Registration Client Ids
+
+## Client
+1. Update the appsettings.json sections for AzureAd and Scope
+2. For AzureAd point to your Azure Tenant and App Registration for the Client application
+```
+"AzureAd": {
+    "Authority": "https://login.microsoftonline.com/22222222-2222-2222-2222-222222222222",
+    "ClientId": "33333333-3333-3333-33333333333333333",
+    "ValidateAuthority": true
+}
+```
+
+3. Use the scope level permissions defined on the API App Registration.  Replace <client-id> and <scope-name> with values from the API app registration
+```
+api://<client-id>/<scope-name>
+```
+
+## Server
+1. Update the appsettings.json and point to your Azure Tenant and App Registration for the Client application
+```
+"AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "Domain": "qualified.domain.name",
+    "TenantId": "22222222-2222-2222-2222-222222222222",
+    "ClientId": "11111111-1111-1111-11111111111111111",
+    "Scopes": "access_as_user",
+    "CallbackPath": "/signin-oidc"
+}
+```
+
 
 
 # References
