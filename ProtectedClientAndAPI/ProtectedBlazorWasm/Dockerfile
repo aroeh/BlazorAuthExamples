@@ -3,12 +3,12 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["ProtectedBlazorWasm/ProtectedBlazorWasm.csproj", "ProtectedBlazorWasm/"]
-COPY ["Protected.Shared/Protected.Shared.csproj", "Protected.Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 
 RUN dotnet restore "ProtectedBlazorWasm/ProtectedBlazorWasm.csproj"
 
 COPY ["ProtectedBlazorWasm/.", "./ProtectedBlazorWasm/"]
-COPY ["Protected.Shared/.", "./Protected.Shared/"]
+COPY ["Shared/.", "./Shared/"]
 
 WORKDIR "/src/ProtectedBlazorWasm"
 RUN dotnet build "ProtectedBlazorWasm.csproj" -c $BUILD_CONFIGURATION

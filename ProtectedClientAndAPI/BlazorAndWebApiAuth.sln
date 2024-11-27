@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtectedWebApi", "Protecte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtectedBlazorWasm", "ProtectedBlazorWasm\ProtectedBlazorWasm.csproj", "{C12F2E3A-EDBC-4F06-960B-31CFE513E5BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protected.Shared", "Protected.Shared\Protected.Shared.csproj", "{04EC6C67-A889-406E-874C-36DDE53552E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A0AB0E1B-83AE-4521-8EE2-E266BA90D276}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{C12F2E3A-EDBC-4F06-960B-31CFE513E5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C12F2E3A-EDBC-4F06-960B-31CFE513E5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C12F2E3A-EDBC-4F06-960B-31CFE513E5BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04EC6C67-A889-406E-874C-36DDE53552E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04EC6C67-A889-406E-874C-36DDE53552E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04EC6C67-A889-406E-874C-36DDE53552E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04EC6C67-A889-406E-874C-36DDE53552E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0AB0E1B-83AE-4521-8EE2-E266BA90D276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0AB0E1B-83AE-4521-8EE2-E266BA90D276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0AB0E1B-83AE-4521-8EE2-E266BA90D276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0AB0E1B-83AE-4521-8EE2-E266BA90D276}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
-namespace Protected.Shared.Models;
+namespace Shared.Models;
 
 public record Restuarant
 {

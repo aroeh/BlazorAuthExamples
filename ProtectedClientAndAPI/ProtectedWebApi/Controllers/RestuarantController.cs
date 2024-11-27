@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using ProtectedWebApi.DomainLogic;
-using Protected.Shared.Models;
+using Shared.Models;
 
 namespace ProtectedWebApi.Controllers;
 

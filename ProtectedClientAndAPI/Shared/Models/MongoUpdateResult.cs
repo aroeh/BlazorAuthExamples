@@ -1,4 +1,4 @@
-﻿namespace Protected.Shared.Models;
+﻿namespace Shared.Models;
 
 public struct MongoUpdateResult
 {
