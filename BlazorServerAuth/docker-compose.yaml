@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: ProtectedApi/Dockerfile
     ports:
-      - 5142:80
+      - 5004:80
     depends_on:
       - mongo
     environment:
@@ -39,9 +39,9 @@ services:
     networks:
       - frontend
     depends_on:
-      - webapi
+      - api
     build:
       context: .
-      dockerfile: ProtectedBlazorWasm/Dockerfile
+      dockerfile: BlazorServer/Dockerfile
     ports:
-      - 5239:80
+      - 5022:8080 # Blazor server needs port 8080 exposed
