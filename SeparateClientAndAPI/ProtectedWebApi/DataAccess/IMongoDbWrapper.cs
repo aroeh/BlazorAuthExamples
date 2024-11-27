@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using ProtectedWebApi.Models;
+using Protected.Shared.Models;
 
 namespace ProtectedWebApi.DataAccess;
 

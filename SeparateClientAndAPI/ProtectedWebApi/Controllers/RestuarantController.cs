@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using ProtectedWebApi.DomainLogic;
-using ProtectedWebApi.Models;
+using Protected.Shared.Models;
 
 namespace ProtectedWebApi.Controllers;
 
@@ -77,7 +77,7 @@ public class RestuarantController(ILogger<RestuarantController> log, IRestuarant
         bool success = await restuarantLogic.InsertRestuarant(restuarant);
 
         logger.LogInformation("Add restuarant request complete...returning results");
-        return TypedResults.Ok(success);
+        return TypedResults.Created("api/restuarant", success);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public class RestuarantController(ILogger<RestuarantController> log, IRestuarant
         bool success = await restuarantLogic.InsertRestuarants(restuarants);
 
         logger.LogInformation("Add restuarant request complete...returning results");
-        return TypedResults.Ok(success);
+        return TypedResults.Created("api/restuarant/bulk", success);
     }
 
     /// <summary>

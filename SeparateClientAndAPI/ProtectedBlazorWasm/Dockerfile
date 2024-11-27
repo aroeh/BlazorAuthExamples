@@ -2,9 +2,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-COPY ["ProtectedBlazorWasm.csproj", "ProtectedBlazorWasm/"]
+COPY ["ProtectedBlazorWasm/ProtectedBlazorWasm.csproj", "ProtectedBlazorWasm/"]
+COPY ["Protected.Shared/Protected.Shared.csproj", "Protected.Shared/"]
+
 RUN dotnet restore "ProtectedBlazorWasm/ProtectedBlazorWasm.csproj"
-COPY . ProtectedBlazorWasm/
+
+COPY ["ProtectedBlazorWasm/.", "./ProtectedBlazorWasm/"]
+COPY ["Protected.Shared/.", "./Protected.Shared/"]
+
 WORKDIR "/src/ProtectedBlazorWasm"
 RUN dotnet build "ProtectedBlazorWasm.csproj" -c $BUILD_CONFIGURATION
 
@@ -16,4 +21,4 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 COPY --from=publish /app/wwwroot .
-COPY ["nginx.conf", "/etc/nginx/nginx.conf"]
+COPY ["ProtectedBlazorWasm/nginx.conf", "/etc/nginx/nginx.conf"]

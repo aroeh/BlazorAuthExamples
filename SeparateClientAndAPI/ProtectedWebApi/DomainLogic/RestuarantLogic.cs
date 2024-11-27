@@ -1,5 +1,5 @@
 ﻿using ProtectedWebApi.DataAccess;
-using ProtectedWebApi.Models;
+using Protected.Shared.Models;
 
 namespace ProtectedWebApi.DomainLogic;
 

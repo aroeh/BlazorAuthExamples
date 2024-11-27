@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProtectedWebApi.Models;
+namespace Protected.Shared.Models;
 
 public record Restuarant
 {
@@ -19,7 +19,9 @@ public record Restuarant
     public string CuisineType { get; set; } = string.Empty;
 
     [BsonElement("website")]
-    public Uri? Website { get; set; }
+    [Required]
+    [Url]
+    public string Url { get; set; } = string.Empty;
 
     [BsonElement("phone")]
     [Phone]

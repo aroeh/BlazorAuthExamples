@@ -15,4 +15,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="HttpRequests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Protected.Shared\Protected.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

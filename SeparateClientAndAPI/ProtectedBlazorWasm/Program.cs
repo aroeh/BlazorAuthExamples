@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.FluentUI.AspNetCore.Components;
+using Microsoft.FluentUI.AspNetCore.Components.Components.Tooltip;
 using ProtectedBlazorWasm;
 using ProtectedBlazorWasm.CustomAuthHandlers;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddFluentUIComponents();
 
 builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
 
@@ -21,6 +25,7 @@ builder.Services.AddHttpClient(httpClientName, client =>
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(httpClientName));
+builder.Services.AddScoped<ITooltipService, TooltipService>();
 
 builder.Services.AddMsalAuthentication(options =>
 {

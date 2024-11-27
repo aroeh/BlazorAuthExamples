@@ -22,8 +22,8 @@ services:
       - backend
       - frontend
     build:
-      context: ./ProtectedWebApi
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ProtectedWebApi/Dockerfile
     ports:
       - 5142:80
     depends_on:
@@ -41,7 +41,7 @@ services:
     depends_on:
       - webapi
     build:
-      context: ./ProtectedBlazorWasm
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ProtectedBlazorWasm/Dockerfile
     ports:
       - 5239:80

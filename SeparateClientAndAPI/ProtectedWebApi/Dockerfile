@@ -5,9 +5,15 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ProtectedWebApi.csproj", "ProtectedWebApi/"]
-RUN dotnet restore "./ProtectedWebApi/ProtectedWebApi.csproj"
-COPY . ProtectedWebApi/
+
+COPY ["ProtectedWebApi/ProtectedWebApi.csproj", "ProtectedWebApi/"]
+COPY ["Protected.Shared/Protected.Shared.csproj", "Protected.Shared/"]
+
+RUN dotnet restore "ProtectedWebApi/ProtectedWebApi.csproj"
+
+COPY ["ProtectedWebApi/.", "./ProtectedWebApi/"]
+COPY ["Protected.Shared/.", "./Protected.Shared/"]
+
 WORKDIR "/src/ProtectedWebApi"
 RUN dotnet build "./ProtectedWebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

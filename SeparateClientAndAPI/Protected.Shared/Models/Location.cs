@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProtectedWebApi.Models;
+namespace Protected.Shared.Models;
 
 public record Location
 {

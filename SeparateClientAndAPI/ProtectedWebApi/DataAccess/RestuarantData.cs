@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using ProtectedWebApi.Constants;
-using ProtectedWebApi.Models;
+using Protected.Shared.Models;
 
 namespace ProtectedWebApi.DataAccess;
 
