@@ -12,7 +12,7 @@ This project contains individual API and Blazor WASM apps that are intended to b
 
 # Setup
 
-## ProtectedBlzaorWasm
+## ProtectedBlazorWasm
 1. Update the appsettings.json sections for AzureAd and Scope
 2. For AzureAd point to your Azure Tenant and App Registration for the Client application
 ```
