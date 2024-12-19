@@ -1,0 +1,66 @@
+﻿@* @page "/restuarants"
+
+
+@using BlazorServer.HttpClientHelper
+@using Microsoft.Identity.Abstractions
+
+@attribute [Authorize]
+
+@inject IRestuarantClient RestuarantApi
+@inject NavigationManager NavigationManager
+
+<PageTitle>Restuarants</PageTitle>
+
+<h3>Restuarants</h3>
+
+<FluentStack Orientation="Orientation.Horizontal">
+    <div HorizontalAlignment="Left">
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Add())" OnClick="Add">New Restuarant</FluentButton>
+    </div>
+</FluentStack>
+
+@if (restuarants == null)
+{
+    <Loading />
+}
+else
+{
+    <FluentDataGrid Items="@restuarants" TGridItem="Restuarant" ShowHover="true" OnRowClick="RowClick">
+        <PropertyColumn Property="@(r => r!.Name)" />
+        <PropertyColumn Property="@(r => r!.CuisineType)" />
+        <PropertyColumn Property="@(r => r!.Phone)" />
+        <PropertyColumn Property="@(r => r!.Url)" />
+    </FluentDataGrid>
+}
+
+@code {
+    IQueryable<Restuarant>? restuarants;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthState { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(AuthState is null)
+        {
+            return;
+        }
+        
+        Restuarant[]? results = await RestuarantApi.Get();
+
+        restuarants = results is null
+            ? new Restuarant[0].AsQueryable()
+            : results.AsQueryable();
+    }
+
+    private void RowClick(FluentDataGridRow<Restuarant> row)
+    {
+        Restuarant clickedRow = row.Item ?? new Restuarant();
+        View(clickedRow);
+    }
+
+    private void Add() => NavigationManager.NavigateTo("/restuarant/add");
+
+    private void View(Restuarant restuarant) => NavigationManager.NavigateTo($"/restuarant/{restuarant.Id}/details");
+}
+ *@

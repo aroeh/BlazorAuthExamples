@@ -21,7 +21,7 @@ public record Restuarant
     [BsonElement("website")]
     [Required]
     [Url]
-    public string Url { get; set; } = string.Empty;
+    public string Website { get; set; } = string.Empty;
 
     [BsonElement("phone")]
     [Phone]

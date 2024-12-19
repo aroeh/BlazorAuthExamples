@@ -1,0 +1,84 @@
+﻿@* @page "/restuarant/{Id}/details"
+
+@using BlazorServer.HttpClientHelper
+
+@attribute [Authorize]
+
+@inject IRestuarantClient RestuarantApi
+@inject NavigationManager NavigationManager
+
+<PageTitle>Restuarant Details</PageTitle>
+
+<h3>@title</h3>
+
+@if (restuarant == null)
+{
+    <Loading />
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6 field-group">
+            <label for="restuarant-name" class="form-label">Name</label>
+            <span id="restuarant-name" class="form-control">@restuarant.Name</span>
+        </div>
+
+        <div class="col-md-6 field-group">
+            <label for="restuarant-type" class="form-label">Type</label>
+            <span id="restuarant-type" class="form-control">@restuarant.CuisineType</span>
+        </div>
+
+        <div class="col-md-6 field-group">
+            <label for="restuarant-phone" class="form-label">Phone</label>
+            <span id="restuarant-phone" class="form-control">@restuarant.Phone</span>
+        </div>
+
+        <div class="col-md-6 field-group">
+            <label for="restuarant-website" class="form-label">Website</label>
+            <a id="restuarant-website" class="form-control" href="@restuarant.Url" rel="noreferrer noopener">
+                @restuarant.Url
+            </a>
+        </div>
+
+        <div class="col-md-6 field-group">
+            <label class="form-label">Address</label>
+            <p class="form-control">@restuarant.Address.Street</p>
+            <p class="form-control">@restuarant.Address.City</p>
+            <p class="form-control">@restuarant.Address.State</p>
+            <p class="form-control">@restuarant.Address.ZipCode</p>
+            <p class="form-control">@restuarant.Address.Country</p>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowStepBack())" OnClick="GoBack">Go Back</FluentButton>
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => Edit(Id))">Edit</FluentButton>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthState { get; set; }
+
+    private string title => restuarant?.Name ?? "No Restuarant Found";
+
+    private Restuarant? restuarant;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (AuthState is null)
+        {
+            return;
+        }
+
+        restuarant = await RestuarantApi.Get(Id);
+    }
+
+    private void GoBack() => NavigationManager.NavigateTo("restuarants");
+
+    private void Edit(string id) => NavigationManager.NavigateTo($"/restuarant/{id}/edit");
+}
+ *@

@@ -1,0 +1,138 @@
+﻿@* @page "/restuarant/add"
+@page "/restuarant/{Id}/edit"
+
+@using BlazorServer.HttpClientHelper
+
+
+@attribute [Authorize]
+
+@inject IRestuarantClient RestuarantApi
+@inject NavigationManager NavigationManager
+
+<PageTitle>@title</PageTitle>
+
+<h3>@title</h3>
+
+@if(restuarant is null)
+{
+    <Loading />
+}
+else
+{
+    <EditForm Model="restuarant" OnValidSubmit="Save">
+        <div class="row">
+            <div class="col-md-6 field-group">
+                <label for="member-first-name" class="form-label">Name</label>
+                <InputText id="member-first-name" class="form-control" @bind-Value="restuarant.Name" />
+                <ValidationMessage For="() => restuarant.Name" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-last-name" class="form-label">Cuisine Type</label>
+                <InputText id="member-last-name" class="form-control" @bind-Value="restuarant.CuisineType" />
+                <ValidationMessage For="() => restuarant.CuisineType" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">Phone</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Phone" />
+                <ValidationMessage For="() => restuarant.Phone" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-bday" class="form-label">Website</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Url" />
+                <ValidationMessage For="() => restuarant.Url" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">Street</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Address.Street" />
+                <ValidationMessage For="() => restuarant.Address.Street" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">City</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Address.City" />
+                <ValidationMessage For="() => restuarant.Address.City" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">State</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Address.State" />
+                <ValidationMessage For="() => restuarant.Address.State" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">Zip Code</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Address.ZipCode" />
+                <ValidationMessage For="() => restuarant.Address.ZipCode" />
+            </div>
+
+            <div class="col-md-6 field-group">
+                <label for="member-pref-name" class="form-label">Country</label>
+                <InputText id="member-pref-name" class="form-control" @bind-Value="restuarant.Address.Country" />
+                <ValidationMessage For="() => restuarant.Address.Country" />
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowStepBack())" OnClick="Cancel">Cancel</FluentButton>
+            <FluentButton Type="ButtonType.Submit" IconStart="@(new Icons.Regular.Size16.Save())">Save</FluentButton>
+        </div>
+
+        <DataAnnotationsValidator />
+
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthState { get; set; }
+
+    private bool addNew => string.IsNullOrWhiteSpace(Id);
+
+    private string title => addNew ? "Add New Restuarant" : "Edit Restuarant";
+
+    private Restuarant? restuarant;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (AuthState is null)
+        {
+            return;
+        }
+        
+        restuarant = addNew
+            ? restuarant = new()
+            : restuarant = await RestuarantApi.Get(Id);
+    }
+
+    private void Cancel() => NavigationManager.NavigateTo("restuarants");
+
+    private async Task Save()
+    {
+        if (addNew)
+        {
+            bool created = await RestuarantApi.Create(restuarant);
+
+            if (created)
+            {
+                NavigationManager.NavigateTo("restuarants");
+            }
+        }
+        else
+        {
+            bool updated = await RestuarantApi.Update(restuarant);
+
+            if (updated)
+            {
+                NavigationManager.NavigateTo($"/restuarant/{Id}/details");
+            }
+        }
+    }
+}
+ *@

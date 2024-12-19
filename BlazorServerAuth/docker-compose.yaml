@@ -42,6 +42,6 @@ services:
       - api
     build:
       context: .
-      dockerfile: BlazorServer/Dockerfile
+      dockerfile: BlazorServer/BlazorServer/Dockerfile
     ports:
-      - 5022:8080 # Blazor server needs port 8080 exposed
+      - 5035:8080 # Blazor server needs port 8080 exposed

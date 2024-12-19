@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using ProtectedApi.DataAccess;
+using ProtectedApi.DomainLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IRestuarantLogic, RestuarantLogic>();
+builder.Services.AddTransient<IRestuarantData, RestuarantData>();
+builder.Services.AddTransient<IMongoDbWrapper, MongoDbWrapper>();
+
+const string corsPolicyName = "ApiCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName,
+        policy =>
+        {
+            string[] allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? ["localhost"];
+            string[] allowedHeaders = builder.Configuration.GetSection("AllowedHeaders").Get<string[]>() ?? ["Authorization", "Content-Type", "Accept"];
+            string[] allowedMethods = builder.Configuration.GetSection("AllowedMethods").Get<string[]>() ?? ["GET"];
+            policy.WithOrigins(allowedOrigins);
+            policy.WithHeaders(allowedHeaders);
+            policy.WithMethods(allowedMethods);
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(corsPolicyName);
 
 app.UseAuthentication();
 
