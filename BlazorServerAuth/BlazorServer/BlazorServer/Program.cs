@@ -16,7 +16,6 @@ builder.Services.AddRazorComponents()
     .AddAuthenticationStateSerialization();
 
 const string httpClientName = "RestuarantApi";
-string baseApiUri = builder.Configuration["RestuarantApi:BaseUrl"] ?? "https://localhost";
 string[] scopes = builder.Configuration.GetSection("RestuarantApi:Scopes").Get<string[]>() ?? ["user.read"];
 
 builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration)
@@ -46,7 +45,7 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 

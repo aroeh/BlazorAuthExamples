@@ -45,3 +45,6 @@ services:
       dockerfile: BlazorServer/BlazorServer/Dockerfile
     ports:
       - 5035:8080 # Blazor server needs port 8080 exposed
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RESTUARANT_API=http://api # passing in the api URL allows the blazor app to communicate with the api on the docker network

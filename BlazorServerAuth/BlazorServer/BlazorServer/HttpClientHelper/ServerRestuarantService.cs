@@ -16,7 +16,8 @@ public class ServerRestuarantService : HttpClientBase, IRestuarantService
         _config = config;
         _tokenService = tokenAcquisition;
         _httpClient = http;
-        _httpClient.BaseAddress = new Uri(_config["RestuarantApi:BaseUrl"]!);
+        //_httpClient.BaseAddress = new Uri(_config["RestuarantApi:BaseUrl"]!);
+        _httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("RESTUARANT_API") ?? "http://localhost");
         _httpClient.DefaultRequestHeaders.Accept.Add(new("application/json"));
     }
 
